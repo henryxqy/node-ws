@@ -207,3 +207,12 @@ httpServer.listen(PORT, () => {
   addAccessTask();
   console.log(`Server is running on port ${PORT}`);
 });
+
+// ... 你的原有代码 ...
+
+// 每半小时自动访问一次本地服务，防止 Koyeb 休眠
+setInterval(() => {
+  require('http').get('http://127.0.0.1:3000/', res => {
+    // 可选：console.log('Keep-alive ping sent');
+  }).on('error', () => {});
+}, 1000 * 30 * 60); // 半小时
